@@ -1,0 +1,179 @@
+{% extends "react_base.html" %}
+
+{% block content %}
+<!-- Background -->
+<div id="particles-js-react" class="position-absolute w-100 h-100" style="z-index:-1;">
+  <div id="bg" data-type="bubbles"></div>
+</div>
+
+<!-- Navbar -->
+<section class="position-relative text-center d-flex flex-column justify-content-center ms-5 me-5" style="margin-top: 0px;">
+  <div id="navbar-root"
+       data-theme="dark"
+       data-logo="Anaemia Prediction"
+       data-logo-position="left"
+       data-nav-align="right"
+       data-rounded="true"
+       data-animate-type="animate__fadeInDown"
+       data-nav-items='[
+       {"name":"Dashboard","link":"/admin/dashboard"},
+       {"name":"View Data","link":"/admin/view_data"},
+       {"name":"Preprocess","link":"/admin/preprocess"},
+       {"name":"Train Model","link":"/admin/models"},
+       {"name":"View Graph","link":"/admin/graph"},
+       {"name":"Logout","link":"/"}
+       ]'>
+  </div>
+</section>
+
+<section class="container mt-5 ">
+  <div class="card shadow-lg rounded-4 p-4 animate__animated animate__fadeIn " style="background-color: #ffffffdc;">
+
+    <!-- Header Card -->
+    <div class="card shadow-lg rounded-4 p-4 text-center mb-5" 
+         style="background: linear-gradient(135deg, #f47b09d6, #efff0eff); color: white;">
+      <h2 class="fw-bold mb-2"><i class="fa-solid fa-square-poll-vertical"></i> Dataset Split & Label Report</h2>
+      <p class="text-white-50 small mb-0">Overview of dataset splits and label distribution</p>
+    </div>
+
+    <!-- Split Info Cards -->
+    <div class="row justify-content-center g-3 text-center mb-4  ">
+      {% for key, value in split_info.items() %}
+      <div class="col-6 col-md-2 d-flex">
+        <div class="card border-0 rounded-4 shadow-sm hvr-bounce-in flex-fill py-3 px-2 text-white"
+             style="background: linear-gradient(135deg, #f70b4aff 80%, #7015f9ff); min-height: 120px;">
+          <h6 class="text-uppercase mb-2 small">{{ key.replace('_',' ') }}</h6>
+          <h3 class="fw-bold">{{ value }}</h3>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Graphs -->
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card shadow-sm rounded-4 p-3">
+          <h5 class="text-center mb-3">Training vs Test Split</h5>
+          <div style="height:300px;">
+            <canvas id="splitChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm rounded-4 p-3">
+        <h5 class="text-center mb-3">Label Distribution</h5>
+        <div style="height: 300px; position: relative;">
+          <canvas id="labelChart"></canvas>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<script>
+  // Get data from Flask
+  const splitInfo = {{ split_info | tojson }};
+  const labelCounts = {{ label_counts | tojson }};
+
+
+  const splitChart = new Chart(document.getElementById('splitChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Training Samples', 'Test Samples'],
+      datasets: [{
+        data: [splitInfo['Training Samples'], splitInfo['Test Samples']],
+        backgroundColor: ['#6a11cb', '#2575fc'],
+        borderRadius: 10,
+        hoverOffset: 15
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 12 } } },
+        tooltip: { 
+          callbacks: {
+            label: function(context) {
+              let value = context.raw;
+              let total = context.dataset.data.reduce((a,b) => a+b, 0);
+              let percent = ((value/total)*100).toFixed(1);
+              return context.label + ': ' + value + ' (' + percent + '%)';
+            }
+          }
+        },
+        datalabels: {
+          color: 'white',
+          formatter: (value, ctx) => {
+            let total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+            let percent = ((value/total)*100).toFixed(1);
+            return percent + '%';
+          },
+          font: { weight: 'bold', size: 12 }
+        }
+      },
+      animation: { animateRotate: true, animateScale: true }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  // ==============================
+  // Label Distribution Pie Chart (Larger + labels outside)
+  // ==============================
+  const labelChart = new Chart(document.getElementById('labelChart'), {
+    type: 'pie',
+    data: {
+      labels: Object.keys(labelCounts),
+      datasets: [{
+        data: Object.values(labelCounts),
+        backgroundColor: [
+          '#ff6384','#36a2eb','#ffcd56','#4bc0c0','#9966ff','#a56eff','#ff9f40'
+        ],
+        hoverOffset: 15
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: { display: false }, // Hide legend
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let value = context.raw;
+              let total = context.dataset.data.reduce((a,b)=>a+b,0);
+              let percent = ((value/total)*100).toFixed(1);
+              return context.label + ': ' + value + ' (' + percent + '%)';
+            }
+          }
+        },
+        datalabels: {
+          color: '#000',
+          formatter: (value, ctx) => {
+            let label = ctx.chart.data.labels[ctx.dataIndex];
+            let total = ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+            let percent = ((value/total)*100).toFixed(1);
+            return label;
+          },
+          anchor: 'end',
+          align: 'end',
+          offset: 10,
+          font: { weight: 'bold', size: 12 }
+        }
+      },
+      animation: { duration: 1200, easing: 'easeOutBounce' }
+    },
+    plugins: [ChartDataLabels]
+  });
+</script>
+
+
+<script type="text/babel" src="{{ url_for('static', filename='react_components/ParticlesBackground.js') }}"></script>
+<script type="text/babel" src="{{ url_for('static', filename='react_components/Navbar.js') }}"></script>
+{% endblock %}

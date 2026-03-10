@@ -1,0 +1,111 @@
+{% extends "react_base.html" %}
+<head>
+  {% block extra_head %}
+  <link rel="stylesheet" href="static/default.css" />
+
+  {% endblock extra_head %}
+</head>
+<body>
+
+  {% block content %}
+  <div id="vanta-bg"></div>
+
+  <section
+    class="position-relative text-center d-flex flex-column justify-content-center ms-5 me-5"
+    style="margin-top: 0px"
+  >
+    <div
+      id="navbar-root"
+      data-theme="light"
+      data-logo="Anaemia Prediction"
+      data-logo-position="left"
+      data-nav-align="right"
+      data-rounded="true"
+      data-animate-type="animate__zoomInDown"
+      data-nav-items='[
+     {"name":"Home",
+     "link":"/",
+     "icon": "fa-solid fa-house"},
+     {"name":"Admin",
+     "link":"/admin/login",
+     "icon": "fa-solid fa-user-tie"},
+     {"name":"User",
+     "link":"/user/register",
+     "icon": "fa-solid fa-user"}
+     ]'
+    ></div>
+  </section>
+  <header>
+    <h1 id="title">Developing a Transparent Anaemia Prediction Model </h1>
+    <h2 id="subtitle">Empowered with Explainable Artificial Intelligence</h2>
+
+    <a href="/project_info">
+      <button class="btn-start">Explore Project</button>
+    </a>
+  </header>
+
+  <section class="cards ">
+    <div class="card text-white">
+      <i class="fa-solid fa-microscope"></i>
+      <h3>AI-Based Diagnosis</h3>
+      <p>Predict anaemia using advanced machine learning models.</p>
+    </div>
+
+    <div class="card text-white">
+      <i class="fa-solid fa-brain"></i>
+      <h3>Explainable AI</h3>
+      <p>SHAP-based insights for complete transparency & trust.</p>
+    </div>
+
+    <div class="card text-white">
+      <i class="fa-solid fa-vial"></i>
+      <h3>Smart Health Insights</h3>
+      <p>Detailed contribution of each blood parameter.</p>
+    </div>
+  </section>
+  <script>
+    // Vanta Background
+    VANTA.WAVES({
+      el: "#vanta-bg",
+      color: 0x0,
+      shininess: 50,
+      waveHeight: 20,
+      waveSpeed: 0.7,
+      zoom: 0.85,
+    });
+
+    // Anime.js Animation (Cards Slide-Up)
+    anime({
+      targets: ".card",
+      translateY: [40, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(200),
+      duration: 1200,
+      easing: "easeOutExpo",
+    });
+
+    // Title animation
+    anime({
+      targets: "#title",
+      opacity: [0, 1],
+      scale: [0.9, 1],
+      duration: 1600,
+      easing: "easeOutExpo",
+    });
+
+    anime({
+      targets: "#subtitle",
+      opacity: [0, 1],
+      translateY: [20, 0],
+      duration: 1800,
+      easing: "easeOutExpo",
+    });
+  </script>
+
+  <script
+    type="text/babel"
+    src="{{ url_for('static', filename='react_components/Navbar.js') }}"
+  ></script>
+
+  {% endblock content %}
+</body>

@@ -1,0 +1,70 @@
+{% extends "react_base.html" %}
+
+{% block content %}
+<div id="particles-js-react" class="position-absolute w-100 h-100" style="z-index:-1;">
+  <div id="bg" data-type="bubbles"></div>
+</div>
+
+
+
+  <!-- Hero Section -->
+  <section class="position-relative text-center d-flex flex-column justify-content-center align-items-center ms-5 me-5" >
+    
+    
+<!-- Navbar -->
+<section class="position-relative text-center d-flex flex-column justify-content-center ms-5 me-5" style="margin-top: 0px;">
+  <div id="navbar-root"
+     data-theme="dark"
+     data-logo="Anaemia Prediction"
+     data-logo-position="left"
+     data-nav-align="right"
+     data-rounded="true"
+     data-animate-type="animate__fadeInDown"
+     data-nav-items='[
+     {"name":"Dashboard","link":"/admin/dashboard"},
+     {"name":"View Data","link":"/admin/view_data"},
+     {"name":"Preprocess","link":"/admin/preprocess"},
+     {"name":"Train Model","link":"/admin/models"},
+     {"name":"View Graph","link":"/admin/graph"},
+     {"name":"Logout","link":"/"}
+     ]'>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+   
+
+</section>
+<section class="container">
+<div id="view-users-root"></div>
+
+
+</section>
+
+
+
+  
+
+  
+
+
+ 
+  
+
+  <!-- ✅ Load external React component -->
+
+
+
+<script type="text/babel" src="{{ url_for('static', filename='react_components/ParticlesBackground.js') }}"></script>
+<script type="text/babel" src="{{ url_for('static', filename='react_components/Navbar.js') }}"></script>
+<script type="text/babel" src="{{ url_for('static', filename='react_components/viewUsers.js') }}"></script>
+
+
+
+{% endblock %}

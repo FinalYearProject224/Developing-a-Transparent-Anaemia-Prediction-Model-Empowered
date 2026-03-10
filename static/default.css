@@ -1,0 +1,98 @@
+body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
+        color: #fff;
+    }
+
+    /* Background */
+    #vanta-bg {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    header {
+        text-align: center;
+        padding-top: 120px;
+        padding-bottom: 20px;
+        animation: fadeDown 1.5s ease-in-out;
+    }
+
+    @keyframes fadeDown {
+        0% { opacity: 0; transform: translateY(-40px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+        font-size: 3.2rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-shadow: 0 0 15px rgba(255,255,255,0.6);
+    }
+
+    h2 {
+        font-size: 1.4rem;
+        font-weight: 300;
+        opacity: 0.9;
+    }
+
+    /* Glass Cards Section */
+    .cards {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 50px;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        width: 300px;
+        padding: 25px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 0 25px rgba(0,0,0,0.3);
+        text-align: center;
+        transition: 0.4s ease-in-out;
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    .card:hover {
+        transform: scale(1.07);
+        box-shadow: 0 0 35px rgba(255,255,255,0.6);
+    }
+
+    .card i {
+        font-size: 45px;
+        margin-bottom: 15px;
+        color: #ffcc00;
+    }
+
+    .btn-start {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 14px 40px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #00ffcc, #0099ff);
+        border: none;
+        color: #000;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.4s;
+        animation: fadeUp 2s ease-in-out;
+    }
+
+    .btn-start:hover {
+        box-shadow: 0 0 20px #00ffe7, 0 0 40px #007bff;
+        transform: translateY(-4px);
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }

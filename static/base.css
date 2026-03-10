@@ -1,0 +1,121 @@
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+
+
+
+.btn-grad {background-image: linear-gradient(to right, #0734e7 0%, #a244ff94  61%, #e70742  100%)}
+         .btn-grad {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 0px #eee;
+            border-radius: 1px;
+            display: block;
+          }
+
+.btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: underline;
+          }
+         
+
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -150%;
+  width: 150%; height: 100%;
+  background: linear-gradient(120deg, rgba(106,17,203,0.1) 0%, rgba(37,117,252,0.2) 50%, rgba(106,17,203,0.1) 100%);
+  animation: shimmerMove 1.5s infinite;
+}
+@keyframes shimmerMove {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+.pulse {
+  animation: pulseGlow 2.5s infinite;
+}
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 10px rgba(37,117,252,0.2); }
+  50% { box-shadow: 0 0 25px rgba(106,17,203,0.4); }
+  100% { box-shadow: 0 0 10px rgba(37,117,252,0.2); }
+}
+.card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 25px rgba(106,17,203,0.3);
+}
+
+/* Fancy table and shimmer styles */
+.results-container {
+  margin-top: 24px;
+}
+
+.fancy-table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+  background: white;
+}
+
+.fancy-table thead th {
+  background: linear-gradient(90deg, #4b6cb7, #182848);
+  color: #fff;
+  font-weight: 600;
+  border: 0;
+}
+
+.fancy-table tbody tr:hover {
+  background: linear-gradient(90deg, rgba(106,17,203,0.04), rgba(37,117,252,0.04));
+  transform: translateY(-2px);
+  transition: all 0.18s ease;
+}
+
+.input-cell {
+  max-height: 120px;
+  overflow: auto;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  color: #222;
+}
+
+/* Placeholder shimmer rows */
+.shimmer-row .placeholder {
+  display: inline-block;
+  height: 12px;
+  background: linear-gradient(90deg,#eee,#e6e6e6,#eee);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.action-row { display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-bottom:8px; }
+
+

@@ -1,0 +1,78 @@
+{% extends "react_base.html" %}
+<head>
+  {% block extra_head %}
+  <link rel="stylesheet" href="static/default.css" />
+  {% endblock extra_head %}
+</head>
+<body>
+  {% block content %}
+   <div id="vanta-bg"></div>
+  <h1 id="title" class="text-center  mb-3">Project Information</h1>
+  <div
+    id="card-root"
+    data-title="Abstract"
+    data-text="Increasing age often affecting human health with various disease which include decrease of ‘haemoglobin’ also known as reduction of ‘red blood cells’ or anaemic patient. Anaemic patients expose to more number of diseases and situation get more horrible when detection get delayed. Currently no easy suitable technique available which can predict anaemic condition. All existing technique predominantly rely on statistics and are trained on clinical risk scores, are frequently incapable of providing practical solutions and meaningful insights into anaemia diagnosis.
+To improve anaemic prediction rate along with explanation which is known as Black-box for AI algorithms, author of this paper employing various AI algorithms such as Decision Tree, SVM, KNN and Gradient Boosting. Prediction of each model will be explained with the help of SHAP and LIME explanation tools. This tool will explain medical expert about those features which are contributing to make prediction. By seeing this explanation medical experts can easily understand weather AI model has used suitable features to make correct prediction or not. 
+In the past many AI algorithms were introduced but medical profession unwilling to accept this algorithms because of lack of explanation. So Author of this paper utilizing AI and explanation tool to prove AI prediction result.
+
+    "
+    data-subtext=""
+  ></div>
+  <div style="display: flex; justify-content: center">
+    <a href="/" class="btn btn-danger">Back to Home</a>
+  </div>
+
+  <script
+    type="text/babel"
+    src="{{ url_for('static', filename='react_components/GlossyCard.js') }}"
+  ></script>
+  <script id="card-data" type="application/json">
+    {{ card_data | tojson | safe }}
+  </script>
+  <script
+    type="text/babel"
+    src="{{ url_for('static', filename='react_components/InfoCard.js') }}"
+  ></script>
+  <script id="card-data" type="application/json">
+    {{ card_data | tojson | safe }}
+  </script>
+  <script>
+    // Vanta Background
+    VANTA.WAVES({
+      el: "#vanta-bg",
+      color: 0x0,
+      shininess: 50,
+      waveHeight: 20,
+      waveSpeed: 0.7,
+      zoom: 0.85,
+    });
+
+    // Anime.js Animation (Cards Slide-Up)
+    anime({
+      targets: ".card",
+      translateY: [40, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(200),
+      duration: 1200,
+      easing: "easeOutExpo",
+    });
+
+    // Title animation
+    anime({
+      targets: "#title",
+      opacity: [0, 1],
+      scale: [0.9, 1],
+      duration: 1600,
+      easing: "easeOutExpo",
+    });
+
+    anime({
+      targets: "#subtitle",
+      opacity: [0, 1],
+      translateY: [20, 0],
+      duration: 1800,
+      easing: "easeOutExpo",
+    });
+  </script>
+  {% endblock content %}
+</body>

@@ -1,0 +1,101 @@
+{% extends "react_base.html" %}
+
+{% block content %}
+<!-- Background -->
+<div id="particles-js-react" class="position-absolute w-100 h-100" style="z-index:-1;">
+  <div id="bg" data-type="bubbles"></div>
+</div>
+
+<!-- Navbar -->
+<section class="position-relative text-center d-flex flex-column justify-content-center ms-5 me-5" style="margin-top: 0px;">
+  <div id="navbar-root"
+     data-theme="dark"
+     data-logo="Anaemia Prediction"
+     data-logo-position="left"
+     data-nav-align="right"
+     data-rounded="true"
+     data-animate-type="animate__fadeInDown"
+     data-nav-items='[
+     {"name":"Dashboard","link":"/admin/dashboard"},
+     {"name":"View Data","link":"/admin/view_data"},
+     {"name":"Preprocess","link":"/admin/preprocess"},
+     {"name":"Train Model","link":"/admin/models"},
+     {"name":"View Graph","link":"/admin/graph"},
+     {"name":"Logout","link":"/"}
+     ]'>
+  </div>
+</section>
+
+<!-- Main Content --> 
+<section class="container mt-5">
+  <div class="card shadow-lg rounded-4 p-4 animate__animated animate__fadeInUp" style="background-color: rgba(255, 255, 255, 1);">
+    <!-- Header -->
+    <div class="card shadow-lg rounded-4 p-4 mb-5 text-center animate__animated animate__fadeIn" 
+     style="
+     background: linear-gradient(135deg, #ff0368ff 60%, #e00cfcff ); 
+     color: white;">
+  <h2 class="fw-bold mb-2"><i class="fa-solid fa-database"></i>Dataset Analysis Report</h2>
+  <p class="text-white-50 small mb-0">Overview of dataset statistics, column details, and sample data</p>
+</div>
+
+
+    <!-- Dataset Summary Cards -->
+   <div class="row g-3 mb-5">
+  {% for key, value in summary.items() %}
+  <div class="col-6 col-md-2 d-flex">
+    <div class="card border-0 rounded-4 shadow-sm hvr-bounce-in text-center py-3 px-2 flex-fill" 
+         style="background: 
+         linear-gradient(135deg,  #fc0bb4ff 0%, #c6008bff  ); 
+         color: white;">
+      <h6 class="text-uppercase mb-2 small">{{ key.replace('_',' ') }}</h6>
+      <h3 class="fw-bold">{{ value }}</h3>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+    <!-- Column Info -->
+    <div class="mt-4">
+      <h5 class="fw-semibold mb-3">Column Details</h5>
+      <div class="table-responsive shadow-sm rounded-4 overflow-hidden">
+        <table class="table table-hover table-striped align-middle mb-0 text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Column</th>
+              <th>Type</th>
+              <th>Unique</th>
+              <th>Missing</th>
+              <th>Sample Values</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for col in column_info %}
+            <tr>
+              <td class="fw-semibold">{{ col.name }}</td>
+              <td>{{ col.dtype }}</td>
+              <td>{{ col.unique }}</td>
+              <td>{{ col.missing }}</td>
+              <td style="max-width:150px; overflow-x:auto;">{{ col.sample }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Data Preview -->
+    <div class="mt-5">
+      <h5 class="fw-semibold mb-3">Data Preview</h5>
+      <div class="table-responsive shadow-sm rounded-4 p-3" style="background-color: rgba(245,245,245,0.9);">
+        {{ dataset_html|safe }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Scripts -->
+<script type="text/babel" src="{{ url_for('static', filename='react_components/ParticlesBackground.js') }}"></script>
+<script type="text/babel" src="{{ url_for('static', filename='react_components/Navbar.js') }}"></script>
+
+{% endblock %}

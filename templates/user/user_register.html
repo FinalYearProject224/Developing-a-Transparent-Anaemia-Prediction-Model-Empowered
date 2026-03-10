@@ -1,0 +1,55 @@
+{% extends "react_base.html" %}
+
+{% block content %}
+<div id="particles-js-react" class="position-absolute w-100 h-100" style="z-index:-1;">
+  <div id="bg" data-type="fire"></div>
+</div>
+
+
+
+  <!-- Hero Section -->
+  <section class="position-relative text-center d-flex flex-column justify-content-center align-items-center ms-5 me-5" >
+    
+<!-- User Registration Card -->
+<div 
+  id="user-register"
+  data-title="User Registration "
+  data-icon="fa-regular fa-address-card"
+  data-action="/user/registerAction"
+  data-userLink="/user/login"
+  data-redirect="/user/login"
+></div>
+
+
+
+
+
+
+
+
+   
+
+</section>
+
+
+
+
+  
+
+  
+
+
+ 
+  
+
+  <!-- ✅ Load external React component -->
+
+
+
+<script type="text/babel" src="{{ url_for('static', filename='react_components/ParticlesBackground.js') }}"></script>
+<script type="text/babel" src="{{ url_for('static', filename='react_components/UserRegistrationCard.js') }}"></script>
+
+
+
+
+{% endblock %}

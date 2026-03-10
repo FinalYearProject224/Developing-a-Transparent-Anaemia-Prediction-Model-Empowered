@@ -1,0 +1,84 @@
+{% extends "react_base.html" %}
+
+{% block content %}
+
+<!-- Background -->
+<div class="position-absolute w-100" style="z-index:-1;">
+  <div id="vanta-bg" data-type="birds" style="width:100vw; height:130vh;"></div>
+</div>
+
+
+
+  <!-- Hero Section -->
+  <section class="position-relative text-center d-flex flex-column justify-content-center align-items-center ms-5 me-5" >
+    
+    
+<!-- Navbar -->
+<section class="position-relative text-center d-flex flex-column justify-content-center ms-5 me-5" style="margin-top: 0px;">
+  <div id="navbar-root"
+     data-theme="light"
+     data-logo="Anaemia Prediction"
+     data-logo-position="left"
+     data-nav-align="right"
+     data-rounded="true"
+     data-animate-type="animate__fadeInDown"
+     data-nav-items='[
+     {"name":"Dashboard","link":"/user/dashboard"},
+     {"name":"Logout","link":"/"}
+     ]'>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+   
+
+</section>
+<section class="container">
+      <h2 class="text-white text-center mb-4">Model Metrics Graph</h2>
+<div
+  style="
+    max-width: 900px;
+    height: 450px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 15px;
+  "
+>
+  <canvas id="metricsChart"></canvas>
+</div>
+      <!-- Pass data to JS -->
+  <script id="graph-data" type="application/json">
+    {{ graph_data | tojson | safe }}
+  </script>
+
+</section>
+
+
+
+  
+
+  
+
+
+ 
+  
+
+  <!-- ✅ Load external React component -->
+
+
+<script type="text/babel" src="{{ url_for('static', filename='react_components/VantaBackground.js') }}"></script>
+<script type="text/babel" src="{{ url_for('static', filename='react_components/Navbar.js') }}"></script>
+<script type="text/babel" src="{{ url_for('static', filename='react_components/BarChart.js') }}"></script>
+
+
+
+
+{% endblock %}

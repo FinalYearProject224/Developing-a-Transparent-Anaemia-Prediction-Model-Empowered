@@ -1,0 +1,58 @@
+{% extends "react_base.html" %}
+
+{% block content %}
+<div id="particles-js-react" class="position-absolute w-100 h-100" style="z-index:-1;">
+  <div id="bg" data-type="snow"></div>
+</div>
+
+
+
+  <!-- Hero Section -->
+  <section class="position-relative text-center d-flex flex-column justify-content-center align-items-center ms-5 me-5" >
+    
+    
+
+<!-- For Glossy Form -->
+<div 
+  id="admin-login-root"
+  data-title="Admin Login"
+  data-icon="fa-solid fa-user-tie"
+  data-action="/admin/loginAction"
+  data-redirect="/admin/dashboard"
+></div>
+
+
+
+
+
+
+
+   
+
+</section>
+<section class="container">
+      <!-- Glossy Card -->
+
+</section>
+
+
+
+  
+
+  
+
+
+ 
+  
+
+  <!-- ✅ Load external React component -->
+
+
+
+<script type="text/babel" src="{{ url_for('static', filename='react_components/ParticlesBackground.js') }}"></script>
+<script type="text/babel" src="{{ url_for('static', filename='react_components/GlossyForm.js') }}"></script>
+
+
+
+
+{% endblock %}
